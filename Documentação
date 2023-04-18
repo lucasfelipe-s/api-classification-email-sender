@@ -1,0 +1,60 @@
+Objetivo
+
+Criar um Form para avaliar habilidades de devs
+
+Controller - pasta responsavel por guardar e criar os Controladores
+Model - pasta para guardar os modelos
+Repository - pasta para guardar as entidades de persistencia de dados
+Service - pasta onde tem as regras de negocio
+
+Requisição chega no controller,o controller pega as informações manda para o service que faz a validação de todas as informações, processa as informações
+e manda para alguem guardar as informações que é o repository (geralmente é um banco de dados)
+
+Modelo: 
+	User: Nome, email, Nivel de 0 a 10 em algumas tecnologias
+
+Gestão do Formulário
+- Controller
+- Validator
+    Email é obrigatório
+    validar que o campo email, é um email válido
+    Obrigatoriedade dos níveis de conhecimento
+    Nome é obrigatório
+- Service
+    Lógica de negócio
+- Repository/Dao
+    Armazenar em banco de dados o registro
+- Envio de email
+
+-RECEBE OS DADOS
+-VALIDA USUÁRIO
+-SALVA OS DADOS
+-APLICA A LÓGICA
+-ENVIAR EMAIL
+
+User - É a entidade que será persistida no BD e que fará a comunicação entre o Service e o Repository
+
+UserDTO - É a classe que eu vou usar para ficar transferindo dados entre Controller e Service
+
+UserRequest - Quando alguém fizer alguma requisição eu pretendo receber um User do tipo Request
+
+UserResponse - É a resposta que eu vou devolver para alguma requisição
+
+UserController - Sempre que receber uma requisição ela vai ser do tipo UserRequest e sempre que devolver uma resposta será do tipo UserResponse
+
+ETAPA 2
+Cada item quebrar em uma branch
+
+- Uma tabela onde registra as skills:
+Skill: Ter um marcador que define se é front ou back, quando for cadastrar definir se é skill de front ou back (uma tabela);
+
+- Entrada de dados: verificar se aquela skill que o usuário está preenchendo é valida no banco de dados, se n existir n é valida
+
+1 usuario n atribuições
+1 skill n atribuições;
+
+- Antes de mandar email, salvar no candidato qual o perfil dele e ai dps manda o email;
+
+- Fazer o EER Diagram;
+
+- Fazer Teste unitario - 20m gravação...
