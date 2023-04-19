@@ -1,6 +1,5 @@
 package br.com.vivo.challengeform.view.model;
 
-import br.com.vivo.challengeform.entities.Skill;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,6 +19,6 @@ public class UserResponse {
 
     private String email;
 
-    private List<SkillResponse> skills;
+    private List<TechnologyResponse> skills;
 
 }

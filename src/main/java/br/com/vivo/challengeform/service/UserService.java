@@ -1,6 +1,6 @@
 package br.com.vivo.challengeform.service;
 
-import br.com.vivo.challengeform.dto.SkillDTO;
+import br.com.vivo.challengeform.dto.TechnologyDTO;
 import br.com.vivo.challengeform.dto.UserDTO;
 import br.com.vivo.challengeform.exceptions.resources.ResourceNotFoundException;
 import br.com.vivo.challengeform.entities.User;
@@ -128,7 +128,7 @@ public class UserService {
         int counterBackEndSkills = 0;
         int counterFrontEndSkills = 0;
 
-        for (SkillDTO skill : user.getSkills()) {
+        for (TechnologyDTO skill : user.getSkills()) {
 
             if (verifySkillMatchAndRatingInRange(skill,"Java")
                     || verifySkillMatchAndRatingInRange(skill,"C#")
@@ -167,11 +167,11 @@ public class UserService {
     /**
      * Metodo que verifica se o nome de uma habilidade é compativel ao nome de alguma habilidade específica e se o nível dessa habilidade está dentro de um determinado intervalo.
      * @param skill Habilidade que será verificada.
-     * @param skillName Nome da habilidade específica que será feita a comparação.
+     * @param technologyName Nome da tecnologia específica que será feita a comparação.
      * @return Retorna verdadeiro ou falso.
      */
-    public boolean verifySkillMatchAndRatingInRange(SkillDTO skill, String skillName) {
-        return skillsNamesMatch(skill, skillName) && skillRatingInRange(skill);
+    public boolean verifySkillMatchAndRatingInRange(TechnologyDTO skill, String technologyName) {
+        return skillsNamesMatch(skill, technologyName) && skillRatingInRange(skill);
     }
 
     /**
@@ -181,7 +181,7 @@ public class UserService {
      * @param skill Habilidade que será verificada.
      * @return Retorna verdadeiro ou falso.
      */
-    public boolean skillRatingInRange(SkillDTO skill) {
+    public boolean skillRatingInRange(TechnologyDTO skill) {
         return skill.getRating() >= 7 && skill.getRating() <= 10;
     }
 
@@ -190,11 +190,11 @@ public class UserService {
      * alguma habilidade específica (ignorando maiuscula e minuscula).
      *
      * @param skill Habilidade que gostaria de comparar.
-     * @param skillName Nome da habilidade que gostaria de comparar.
+     * @param technologyName Nome da tecnologia que gostaria de comparar.
      * @return Retorna verdadeiro ou falso.
      */
-    public boolean skillsNamesMatch(SkillDTO skill, String skillName) {
-        return skill.getName().equalsIgnoreCase(skillName);
+    public boolean skillsNamesMatch(TechnologyDTO skill, String technologyName) {
+        return skill.getName().equalsIgnoreCase(technologyName);
     }
 
 }

@@ -28,5 +28,5 @@ public class User {
 			name = "user_skill",
 			joinColumns = @JoinColumn(name = "id_user"),
 			inverseJoinColumns = @JoinColumn(name = "id_skill"))
-	private List<Skill> skills;
+	private List<Technology> skills;
 }

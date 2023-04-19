@@ -12,10 +12,10 @@ import static java.lang.annotation.RetentionPolicy.*;
 
 @Target({ElementType.PARAMETER, METHOD, FIELD, ANNOTATION_TYPE})
 @Retention(RUNTIME)
-@jakarta.validation.Constraint(validatedBy = SkillValidator.class)
+@jakarta.validation.Constraint(validatedBy = TechnologyValidator.class)
 @Documented
-public @interface ValidSkills {
-	String message() default "Habilidade inválida";
+public @interface ValidTechnologies {
+	String message() default "Tecnologia inválida";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

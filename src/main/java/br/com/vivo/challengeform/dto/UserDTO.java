@@ -2,7 +2,7 @@ package br.com.vivo.challengeform.dto;
 
 import java.util.List;
 
-import br.com.vivo.challengeform.validator.ValidSkills;
+import br.com.vivo.challengeform.validator.ValidTechnologies;
 import br.com.vivo.challengeform.validator.ValidUser;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,6 +21,6 @@ public class UserDTO {
 
 	private String email;
 
-	@ValidSkills
-	private List<SkillDTO> skills;
+	@ValidTechnologies
+	private List<TechnologyDTO> skills;
 }

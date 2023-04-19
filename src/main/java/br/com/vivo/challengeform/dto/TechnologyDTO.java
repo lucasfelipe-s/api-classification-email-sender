@@ -9,10 +9,12 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class SkillDTO {
+public class TechnologyDTO {
 	private long id;
 
 	private String name;
+
+	private String type;
 	
 	private int rating;
 

@@ -14,13 +14,15 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "skill")
-public class Skill{
+@Table(name = "technologies")
+public class Technology {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
 	private String name;
+
+	private String type;
 
 	private int rating;
 
