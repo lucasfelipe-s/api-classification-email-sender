@@ -1,10 +1,16 @@
 package br.com.vivo.challengeform.view.controller;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import br.com.vivo.challengeform.dto.LevelDTO;
+import br.com.vivo.challengeform.dto.TechnologyDTO;
+import br.com.vivo.challengeform.entities.Level;
 import br.com.vivo.challengeform.service.UserService;
+import br.com.vivo.challengeform.view.model.LevelRequest;
 import br.com.vivo.challengeform.view.model.UserRequest;
 import br.com.vivo.challengeform.view.model.UserResponse;
 import jakarta.validation.Valid;
@@ -75,7 +81,6 @@ public class UserController {
 	public ResponseEntity<UserResponse> addUser(@Valid @RequestBody UserRequest userRequest) {
 
 		ModelMapper mapper =new ModelMapper();
-
 		UserDTO userDTO = mapper.map(userRequest, UserDTO.class);
 
 		userDTO =  userService.addUser(userDTO);
@@ -99,7 +104,7 @@ public class UserController {
 	 * Remove um usuário do banco de dados pelo Id.
 	 * @param id do usuário que será removido.
 	 */
-	@DeleteMapping("/{id}")
+	@DeleteMapping("/user/{id}")
 	public ResponseEntity<?> deleteUser(@PathVariable long id) {
 		userService.deleteUser(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
