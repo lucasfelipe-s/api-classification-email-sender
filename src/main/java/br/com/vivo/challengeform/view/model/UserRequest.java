@@ -17,6 +17,14 @@ public class UserRequest {
 
     private String email;
 
-    private List<TechnologyRequest> skills;
+    private List<LevelRequest> levels;
 
+    @Override
+    public String toString() {
+        return "UserRequest{" +
+                "name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", levels=" + levels +
+                '}';
+    }
 }

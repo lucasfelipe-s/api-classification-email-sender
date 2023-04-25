@@ -1,57 +1,46 @@
 package br.com.vivo.challengeform.validator;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import br.com.vivo.challengeform.dto.TechnologyDTO;
+import br.com.vivo.challengeform.enums.TechnologyTypes;
+import br.com.vivo.challengeform.entities.Technology;
 import br.com.vivo.challengeform.exceptions.resources.ResourceBadRequestException;
+import br.com.vivo.challengeform.repository.TechnologyRepository;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
-public class TechnologyValidator implements ConstraintValidator<ValidTechnologies, List<TechnologyDTO>> {
+public class TechnologyValidator implements ConstraintValidator<ValidTechnology, TechnologyDTO> {
+
+	private final TechnologyRepository technologyRepository;
+
+	public TechnologyValidator(TechnologyRepository technologyRepository) {
+		this.technologyRepository = technologyRepository;
+	}
 
 	@Override
-	public boolean isValid(List<TechnologyDTO> technologies, ConstraintValidatorContext context) {
+	public boolean isValid(TechnologyDTO technology, ConstraintValidatorContext context) {
 
-		if(technologies == null ) {
-			throw new ResourceBadRequestException("A lista de habilidades não pode ser nula");
+		String technologyName = technology.getName();
+		TechnologyTypes technologyType = technology.getType();
+
+		if (technologyName == null || technologyName.isBlank()) {
+			throw new ResourceBadRequestException("O nome da tecnologia não pode ser vazio");
 		}
 
-		if(technologies.size() == 0) throw new ResourceBadRequestException("A lista de habilidades não pode ser vazia");
+		if (technologyType == null || technologyName.isBlank()) {
+			throw new ResourceBadRequestException("O tipo da tecnologia não pode ser vazio");
+		}
 
-		List<String> availableTechnologies = new ArrayList<>();
-		availableTechnologies.add("JAVA");
-		availableTechnologies.add("C#");
-		availableTechnologies.add("Golang");
-		availableTechnologies.add("JavaScript");
-		availableTechnologies.add("VUE");
-		availableTechnologies.add("PHP");
-
-		for (TechnologyDTO technology : technologies) {
-			boolean nameTechnologyIsValid = false;
-			String technologyName = technology.getName();
-
-			if (technologyName == null || technologyName.isBlank()) {
-				throw new ResourceBadRequestException("O nome da tecnologia não pode ser vazio");
+		List<Technology> availableTechnologies = technologyRepository.findAll();
+		for (Technology availableTechnology : availableTechnologies) {
+			if(technologyName.equalsIgnoreCase(availableTechnology.getName())){
+				throw new ResourceBadRequestException("A habilidade: '"+technologyName+"' já está cadastrada!");
 			}
-
-			int rating = technology.getRating();
-			if(rating < 0 || rating > 10) {
-				throw new ResourceBadRequestException("O nível da tecnologia '" +technologyName+ "' deve ser um número entre 0 e 10");
-			}
-
-	        for (String availableTechnology : availableTechnologies) {
-	        	if(technologyName.equalsIgnoreCase(availableTechnology)) {
-	        		nameTechnologyIsValid = true;
-	        		break;
-	        	}
-	        }
-
-	        if(!nameTechnologyIsValid) {
-				throw new ResourceBadRequestException("O nome da habilidade '" + technologyName+ "' está incorreto");
-	        }
 		}
 
 		return true;
 	}
+
+
 }

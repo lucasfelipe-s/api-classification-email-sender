@@ -10,8 +10,20 @@ public class UserValidator implements ConstraintValidator<ValidUser, UserDTO> {
     @Override
     public boolean isValid(UserDTO user, ConstraintValidatorContext context) {
 
-        return validateUserName(user) && validateEmail(user);
+        return validateUserName(user) && validateEmail(user) && validateLevels(user);
 
+    }
+
+    /**
+     * Verifica se o usuário tem níveis de habilidade definidos.
+     * @param user O usuário a ser verificado.
+     * @return True se o usuário tiver níveis de habilidade definidos, false caso contrário.
+     */
+    public boolean validateLevels(UserDTO user) {
+        if (user.getLevels() == null || user.getLevels().isEmpty()){
+            throw new ResourceBadRequestException("O campo 'levels' não pode estar vazio");
+        }
+        return true;
     }
 
     /**

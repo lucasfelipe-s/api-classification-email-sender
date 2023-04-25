@@ -10,11 +10,11 @@ import java.lang.annotation.Retention;
 import static java.lang.annotation.ElementType.*;
 import static java.lang.annotation.RetentionPolicy.*;
 
-@Target({ElementType.PARAMETER, METHOD, FIELD, ANNOTATION_TYPE})
+@Target({ElementType.TYPE, ElementType.PARAMETER, METHOD, FIELD, ANNOTATION_TYPE})
 @Retention(RUNTIME)
 @jakarta.validation.Constraint(validatedBy = TechnologyValidator.class)
 @Documented
-public @interface ValidTechnologies {
+public @interface ValidTechnology {
 	String message() default "Tecnologia inválida";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};

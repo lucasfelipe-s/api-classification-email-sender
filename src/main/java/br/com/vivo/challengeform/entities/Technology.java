@@ -2,7 +2,6 @@ package br.com.vivo.challengeform.entities;
 
 import br.com.vivo.challengeform.enums.TechnologyTypes;
 import br.com.vivo.challengeform.enums.TechnologyTypesConverter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

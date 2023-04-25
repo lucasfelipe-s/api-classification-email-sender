@@ -19,6 +19,6 @@ public class UserResponse {
 
     private String email;
 
-    private List<TechnologyResponse> skills;
+    private List<LevelResponse> levels;
 
 }

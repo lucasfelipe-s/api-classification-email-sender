@@ -1,13 +1,11 @@
 package br.com.vivo.challengeform.view.model;
 
 
-import br.com.vivo.challengeform.dto.UserDTO;
+import br.com.vivo.challengeform.enums.TechnologyTypes;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.List;
 
 @Getter
 @Setter
@@ -17,7 +15,13 @@ public class TechnologyRequest {
 
     private String name;
 
-    private int rating;
+    private TechnologyTypes type;
 
-    private List<UserDTO> users;
+    @Override
+    public String toString() {
+        return "TechnologyRequest{" +
+                "name='" + name + '\'' +
+                ", type=" + type +
+                '}';
+    }
 }
