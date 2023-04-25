@@ -2,11 +2,18 @@ package br.com.vivo.challengeform.validator;
 
 import br.com.vivo.challengeform.dto.UserDTO;
 import br.com.vivo.challengeform.exceptions.resources.ResourceBadRequestException;
+import br.com.vivo.challengeform.repository.UserRepository;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
 
 public class UserValidator implements ConstraintValidator<ValidUser, UserDTO> {
+
+    private final UserRepository userRepository;
+    public UserValidator(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
     @Override
     public boolean isValid(UserDTO user, ConstraintValidatorContext context) {
 
@@ -51,16 +58,22 @@ public class UserValidator implements ConstraintValidator<ValidUser, UserDTO> {
      */
     public boolean validateEmail(UserDTO user){
 
-        if (user.getEmail() == null) {
-            throw new ResourceBadRequestException("O campo 'email' não pode estar nulo");
-        }else if (user.getEmail().isBlank()) {
-            throw new ResourceBadRequestException("O campo 'email' não pode estar vazio");
-        }else if (!user.getEmail().contains("@")
-                || user.getEmail().indexOf("@") < 1
-                || !user.getEmail().contains(".")
-                || user.getEmail().indexOf(".") < 3
-                || user.getEmail().contains(" ") ){
-            throw new ResourceBadRequestException("O campo 'email' está inválido");
+        String userEmail = user.getEmail();
+
+        if (userEmail == null) {
+            throw new ResourceBadRequestException("O campo 'email' não pode estar nulo!");
+        }else if (userEmail.isBlank()) {
+            throw new ResourceBadRequestException("O campo 'email' não pode estar vazio!");
+        }else if (!userEmail.contains("@")
+                || userEmail.indexOf("@") < 1
+                || !userEmail.contains(".")
+                || userEmail.indexOf(".") < 3
+                || userEmail.contains(" ") ){
+            throw new ResourceBadRequestException("O campo 'email' está inválido!");
+        }
+
+        if(userRepository.existsByEmailIgnoreCase(userEmail)){
+            throw new ResourceBadRequestException("O Email inserido já está cadastrado!");
         }
 
         return true;

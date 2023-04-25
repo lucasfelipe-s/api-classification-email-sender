@@ -25,7 +25,7 @@ public class User {
 	@Column(nullable = false)
 	private String name;
 
-	@Column(nullable = false)
+	@Column(nullable = false, unique = true)
 	private String email;
 
 	@Convert(converter = TechnologyTypesConverter.class)
@@ -33,15 +33,4 @@ public class User {
 
 	@OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST,orphanRemoval = true)
 	private List<Level> levels = new ArrayList<>();
-
-	@Override
-	public String toString() {
-		return "User{" +
-				"id=" + id +
-				", name='" + name + '\'' +
-				", email='" + email + '\'' +
-				", profile=" + profile +
-				", levels=" + levels +
-				'}';
-	}
 }
