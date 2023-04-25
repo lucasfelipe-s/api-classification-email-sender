@@ -1,11 +1,14 @@
 package br.com.vivo.challengeform.entities;
 
+import br.com.vivo.challengeform.enums.TechnologyTypes;
+import br.com.vivo.challengeform.enums.TechnologyTypesConverter;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -13,20 +16,32 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
+	@Column(nullable = false)
 	private String name;
 
+	@Column(nullable = false)
 	private String email;
 
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(
-			name = "user_skill",
-			joinColumns = @JoinColumn(name = "id_user"),
-			inverseJoinColumns = @JoinColumn(name = "id_skill"))
-	private List<Technology> skills;
+	@Convert(converter = TechnologyTypesConverter.class)
+	private TechnologyTypes profile = TechnologyTypes.NONE;
+
+	@OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST,orphanRemoval = true)
+	private List<Level> levels = new ArrayList<>();
+
+	@Override
+	public String toString() {
+		return "User{" +
+				"id=" + id +
+				", name='" + name + '\'' +
+				", email='" + email + '\'' +
+				", profile=" + profile +
+				", levels=" + levels +
+				'}';
+	}
 }
